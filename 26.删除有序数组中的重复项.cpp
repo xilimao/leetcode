@@ -1,3 +1,11 @@
+// @before-stub-for-debug-begin
+#include <vector>
+#include <string>
+#include "commoncppproblem26.h"
+
+using namespace std;
+// @before-stub-for-debug-end
+
 /*
  * @lc app=leetcode.cn id=26 lang=cpp
  *
@@ -8,17 +16,18 @@
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        int n = nums.size();
-        if (n == 0) {
+        if (nums.size() == 0) 
+        {
             return 0;
         }
-        int fast = 1, slow = 1;
-        while (fast < n) {
-            if (nums[fast] != nums[fast - 1]) {
+        int slow = 1;
+        for (int fast = 1; fast < nums.size(); fast++)
+        {
+            if (nums[fast] != nums[fast - 1]) 
+            {
                 nums[slow] = nums[fast];
-                ++slow;
+                slow++;
             }
-            ++fast;
         }
         return slow;
     }

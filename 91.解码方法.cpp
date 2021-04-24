@@ -8,7 +8,7 @@
 class Solution {
 public:
     int numDecodings(string s) {
-   int n = s.size();
+        int n = s.size();
         s = " " + s;
         vector<int> f(n + 1,0);
         f[0] = 1;        

@@ -10,8 +10,10 @@ public:
     int shipWithinDays(vector<int>& weights, int D) 
     {
         // 序列中最大元素地址（迭代器）
+        //单次最大运载量(因为一次最少运送一个货物,如果取最小的货物的重量,那么就没办法运送质量较大的货物)
         int left = *max_element(weights.begin(), weights.end());
         //取vector的和,第四个参数可以使用labmbda表达式，也可以使用系统的minus<int>(),multiplies<int>() 
+        //最大运载量
         int right = accumulate(weights.begin(), weights.end(), 0);
 
         while (left < right)

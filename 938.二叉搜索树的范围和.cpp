@@ -40,27 +40,31 @@ public:
 
     // void dfs(TreeNode* root)
     // {
-    //     dfs(root->left);
-
+    //     if (!root)
+    //     {
+    //         return;
+    //     }
+        
+    //     //如果<l 则其左子树还会<l, 没必要继续遍历
+    //     if (root->val > l)
+    //     {
+    //         dfs(root->left);
+    //     }
+        
     //     if(root->val >= l && root->val <= h)
     //     {
     //         sum += root->val;
     //     }
-    //     else
-    //     {
-    //         return;
-    //     }
 
-    //     dfs(root->right);
+    //     //如果>h 则其左子树还会>h，没必要继续遍历
+    //     if (root->val < h)
+    //     {
+    //         dfs(root->right);
+    //     }
     // }
 
     // int rangeSumBST(TreeNode* root, int low, int high) 
     // {
-    //     if(!root)
-    //     {
-    //         return 0;
-    //     }
-
     //     sum = 0;
     //     l = low;
     //     h = high;
@@ -70,22 +74,8 @@ public:
     //     return sum;
     // }
 
-    // int s, l, h;
-    // int rangeSumBST(TreeNode* root, int low, int high) {
-    //     s = 0; l = low; h = high;
-    //     dfs(root);
-    //     return s;
-    // }
 
-    // void dfs(TreeNode* root){
-    //     if (root){
-    //         dfs(root->left);
-    //         if (root->val >= l && root->val <= h)s += root->val;
-    //         else if (root->val > h)return;
-    //         dfs(root->right);
-    //     }
-    // }
-
+    //使用栈模拟递归过程
     int rangeSumBST(TreeNode* root, int low, int high) 
     {
         int ans = 0;
@@ -96,6 +86,12 @@ public:
             while (root)
             {
                 st.push(root);
+
+                if(root->val < low)
+                {
+                    break;
+                }
+
                 root = root->left;
             }
 
@@ -103,7 +99,7 @@ public:
             root = st.top();
             st.pop();
 
-            //如果当前结点的值大于High说明不在范围之内
+            //因为中序遍历是递增的，其right会越来越大,索引可以提前判断推出
             if (root->val > high)
             {
                 break;
